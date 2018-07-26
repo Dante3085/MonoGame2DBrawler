@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/2_IT_Informatik/2_Programmierung/1_MSVS2017Entwicklung/1_Projekte/MonoGame2DBrawler/MonoGame2DBrawler/MonoGame2DBrawler/Content/ConsoleFont.spritefont</File>
+    <File>C:/2_IT_Informatik/2_Programmierung/1_MSVS2017Entwicklung/1_Projekte/MonoGame2DBrawler/MonoGame2DBrawler/MonoGame2DBrawler/Content/playerSheet.png</File>
+    <File>C:/2_IT_Informatik/2_Programmierung/1_MSVS2017Entwicklung/1_Projekte/MonoGame2DBrawler/MonoGame2DBrawler/MonoGame2DBrawler/Content/SpriteFont1.spritefont</File>
+  </SourceFiles>
+</SourceFileCollection>

@@ -23,3 +23,29 @@ Y:\2_IT_Informatik\2_Programmierung\3_MS VS 2017 CE\2_Projekte\MonoGame2DBrawler
 Y:\2_IT_Informatik\2_Programmierung\3_MS VS 2017 CE\2_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\obj\x86\Debug\MonoGame2DBrawler.csproj.CopyComplete
 Y:\2_IT_Informatik\2_Programmierung\3_MS VS 2017 CE\2_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\obj\x86\Debug\MonoGame2DBrawler.exe
 Y:\2_IT_Informatik\2_Programmierung\3_MS VS 2017 CE\2_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\obj\x86\Debug\MonoGame2DBrawler.pdb
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\obj\x86\Debug\MonoGame2DBrawler.csprojAssemblyReference.cache
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\obj\x86\Debug\MonoGame2DBrawler.csproj.CoreCompileInputs.cache
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\obj\x86\Debug\MonoGame2DBrawler.exe
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\obj\x86\Debug\MonoGame2DBrawler.pdb
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\MonoGame2DBrawler.exe
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\MonoGame2DBrawler.pdb
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.dll
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.xml
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\obj\x86\Debug\MonoGame2DBrawler.csproj.CopyComplete
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\Content\ConsoleFont.xnb
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\Content\playerSheet.xnb
+C:\2_IT_Informatik\2_Programmierung\1_MSVS2017Entwicklung\1_Projekte\MonoGame2DBrawler\MonoGame2DBrawler\MonoGame2DBrawler\bin\Windows\x86\Debug\Content\SpriteFont1.xnb
