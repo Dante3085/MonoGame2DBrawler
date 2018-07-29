@@ -224,10 +224,7 @@ namespace MonoGame2DBrawler.Sprites
         {
             // This can't collide with itself => Return false.
             if (this.Equals(partner))
-            {
-                Game1.gameConsole.Log(Name + " cant collide with itself!");
                 return false;
-            }
 
             // Return whether or not this collides with partner.
             return this._boundingBox.Intersects(partner.BoundingBox);
