@@ -9,11 +9,24 @@ namespace MonoGame2DBrawler.Characters.Actions
     public enum EAction
     {
         None,
-        HalfHealth,
-        DoubleHealth,
-        Death,
-        Heal,
-        RefillMana,
-        DealDamage
+
+        #region Items
+        HealthPotion,
+        ManaPotion,
+        #endregion
+
+        #region Magics
+        Fire,
+        Water,
+        #endregion
+
+        #region PhysicalAttacks
+        Cleave,
+        #endregion
+
+        #region RevengeSkills
+        Counter,
+        Break,
+        #endregion
     }
 }

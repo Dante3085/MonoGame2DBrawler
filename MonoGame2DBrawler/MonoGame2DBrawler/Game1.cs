@@ -123,11 +123,7 @@ namespace MonoGame2DBrawler
                 c.AnimatedSprite.Update(gameTime);
 
             if (characters[0].AnimatedSprite.CollidesWith(characters[1].AnimatedSprite))
-            {
-                gameConsole.Log("Characters[1][CurrentHp/MaxHp]: " + characters[1]._hp._first + "/" + characters[1]._hp._second);
-                characters[0].UsePhysicalSkill(characters[1]);
-                gameConsole.Log("Characters[1][CurrentHp/MaxHp]: " + characters[1]._hp._first + "/" + characters[1]._hp._second);
-            }
+                characters[0].UseCurrentAction(characters[1]);
 
 
             base.Update(gameTime);

@@ -5,10 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using MonoGame2DBrawler.Characters.Items;
-using MonoGame2DBrawler.Characters.Skills.Magics;
-using MonoGame2DBrawler.Characters.Skills.PhysicalSkills;
-using MonoGame2DBrawler.Characters.Skills.RevengeSkills;
 using MonoGame2DBrawler.Sprites;
 using MonoGame2DBrawler.Characters.Actions;
 
@@ -32,17 +28,11 @@ namespace MonoGame2DBrawler.Characters
 
         private string _name;
 
-        /// <summary>
-        /// _first is currentHp
-        /// _second is maxHp
-        /// </summary>
-        public Pair<int> _hp;
+        private int _currentHp;
+        private int _maxHp;
 
-        /// <summary>
-        /// _first is currentMp
-        /// _second is maxMp
-        /// </summary>
-        public Pair<int> _mp;
+        private int _currentMp;
+        private int _maxMp;
 
         private int _strength;
         private int _defence;
@@ -53,12 +43,9 @@ namespace MonoGame2DBrawler.Characters
 
         private bool _isAlive = true;
 
-        // Dictionaries are used because they grant O(1) lookup.
-        // Lookup a skill or an item by providing the corresponding enum key.
-        private Dictionary<EItem, Item> _items = new Dictionary<EItem, Item>();
-        private Dictionary<EMagic, Magic> _magics = new Dictionary<EMagic, Magic>();
-        private Dictionary<EPhysicalSkill, PhysicalSkill> _physicalSkills = new Dictionary<EPhysicalSkill, PhysicalSkill>();
-        private Dictionary<ERevengeSkill, RevengeSkill> _revengeSkills = new Dictionary<ERevengeSkill, RevengeSkill>();
+        private EAction _currentAction = EAction.None;
+
+        private Dictionary<EAction, AAction> _actions = new Dictionary<EAction, AAction>();
         #endregion
 
         #region Properties
@@ -75,13 +62,23 @@ namespace MonoGame2DBrawler.Characters
         public int Speed { get => _speed; set => _speed = value; }
         public int RevengeValue { get => _revengeValue; set => _revengeValue = value; }
         public bool IsAlive { get => _isAlive; set => _isAlive = value; }
+        public string Name { get => _name; set => _name = value; }
+        public int CurrentHp { get => _currentHp; set => _currentHp = value; }
+        public int MaxHp { get => _maxHp; set => _maxHp = value; }
+        public int CurrentMp { get => _currentMp; set => _currentMp = value; }
+        public int MaxMp { get => _maxMp; set => _maxMp = value; }
         #endregion
 
         public Character(String name = "NoName", int maxHp = 0, int maxMp = 0, int strength = 0, int defence = 0, int wit = 0, int agility = 0, int speed = 0)
         {
             _name = name;
-            _hp = new Pair<int>(maxHp, maxHp);
-            _mp = new Pair<int>(maxMp, maxMp);
+
+            _currentHp = maxHp;
+            _maxHp = maxHp;
+
+            _currentMp = maxMp;
+            _maxMp = maxMp;
+
             _strength = strength;
             _defence = defence;
             _wit = wit;
@@ -92,34 +89,37 @@ namespace MonoGame2DBrawler.Characters
             SetUp_PhysicalSkills();
             SetUp_RevengeSkills();
             SetUp_Magics();
+
+            _currentAction = EAction.Cleave;
         }
 
-        public void UsePhysicalSkill(Character target)
+        public void UseCurrentAction(Character target)
         {
-            _physicalSkills[EPhysicalSkill.Cleave].ExecuteAction(target);
+            _actions[_currentAction].ExecuteAction(target);
+            Game1.gameConsole.Log(this.Name + " used " + _currentAction + " on " + target.Name);
         }
 
         #region SetUpMethods
         private void SetUp_Items()
         {
-            _items[EItem.HealthPotion] = Item.HealthPotion(EAction.Heal);
-            _items[EItem.ManaPotion] = Item.ManaPotion(EAction.RefillMana);
+            _actions[EAction.HealthPotion] = AAction.HealthPotion();
+            _actions[EAction.ManaPotion] = AAction.ManaPotion();
         }
 
         private void SetUp_Magics()
         {
-            _magics[EMagic.Fire] = Magic.Fire(EAction.DealDamage);
+            _actions[EAction.Fire] = AAction.Fire();
         }
 
         private void SetUp_PhysicalSkills()
         {
-            _physicalSkills[EPhysicalSkill.Cleave] = PhysicalSkill.Cleave(EAction.DealDamage);
+            _actions[EAction.Cleave] = AAction.Cleave();
         }
 
         private void SetUp_RevengeSkills()
         {
-            _revengeSkills[ERevengeSkill.Counter] = RevengeSkill.Counter(EAction.DealDamage);
-            _revengeSkills[ERevengeSkill.Break] = RevengeSkill.Break(EAction.DealDamage);
+            _actions[EAction.Counter] = AAction.Counter();
+            _actions[EAction.Break] = AAction.Break();
         }
         #endregion
     }

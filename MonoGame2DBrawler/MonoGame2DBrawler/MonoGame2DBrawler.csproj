@@ -43,16 +43,8 @@
   <ItemGroup>
     <Compile Include="Characters\Actions\AAction.cs" />
     <Compile Include="Characters\Actions\EAction.cs" />
+    <Compile Include="Characters\Actions\EActionMethod.cs" />
     <Compile Include="Characters\Character.cs" />
-    <Compile Include="Characters\Items\EItem.cs" />
-    <Compile Include="Characters\Items\Item.cs" />
-    <Compile Include="Characters\Skills\Magics\EMagic.cs" />
-    <Compile Include="Characters\Skills\Magics\Magic.cs" />
-    <Compile Include="Characters\Skills\PhysicalSkills\EPhysicalSkill.cs" />
-    <Compile Include="Characters\Skills\PhysicalSkills\PhysicalSkill.cs" />
-    <Compile Include="Characters\Skills\RevengeSkills\ERevengeSkill.cs" />
-    <Compile Include="Characters\Skills\RevengeSkills\RevengeSkill.cs" />
-    <Compile Include="Characters\Skills\Skill.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameConsole\Command.cs" />
     <Compile Include="GameConsole\CommandEventArgs.cs" />
