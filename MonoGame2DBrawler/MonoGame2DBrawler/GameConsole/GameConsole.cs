@@ -1021,7 +1021,7 @@ namespace VosSoft.Xna.GameConsole
         #region Private Methods
 
         /// <summary>
-        /// Calculates the the font size for each character. Because the font should be a console
+        /// Calculates the font size for each character. Because the font should be a console
         /// font where all characters have the same width, this is not very complicated.
         /// </summary>
         void calculateFontSize()

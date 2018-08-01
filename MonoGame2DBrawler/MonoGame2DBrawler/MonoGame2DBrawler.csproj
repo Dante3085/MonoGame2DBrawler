@@ -56,6 +56,7 @@
     <Compile Include="GameConsole\LogEventArgs.cs" />
     <Compile Include="General\GameObject.cs" />
     <Compile Include="General\ICollidable.cs" />
+    <Compile Include="General\IInputable.cs" />
     <Compile Include="General\IMDrawable.cs" />
     <Compile Include="General\Pair.cs" />
     <Compile Include="Input\GamePadInput.cs" />

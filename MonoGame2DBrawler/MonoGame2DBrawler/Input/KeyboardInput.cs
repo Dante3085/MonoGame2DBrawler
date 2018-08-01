@@ -18,5 +18,10 @@ namespace MonoGame2DBrawler.Input
         public Keys Right { get; set; }
         public Keys Down { get; set; }
         public Keys Attack { get; set; }
+
+        public static bool OnKeyPress(Keys key, KeyboardState currentState, KeyboardState previousState)
+        {
+            return (currentState.IsKeyDown(key) && previousState.IsKeyUp(Keys.Space));
+        }
     }
 }

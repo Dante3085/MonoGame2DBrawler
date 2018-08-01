@@ -14,14 +14,14 @@ namespace MonoGame2DBrawler.Sprites
     /// <summary>
     /// Describes a static Sprite image.
     /// </summary>
-    public class Sprite : GameObject, ICollidable, IMDrawable
+    public class Sprite : GameObject, ICollidable, IMDrawable, IInputable
     {
         #region MemberVariables
         // Stores this Sprite's texture.
         protected Texture2D _texture;
 
         // Stores this Sprite's Position in the 2D-World.
-        protected Vector2 _position;
+        public Vector2 _position;
 
         // Stores this Sprite's velocity as a Vector2.
         private Vector2 _velocity;
@@ -29,8 +29,8 @@ namespace MonoGame2DBrawler.Sprites
         private int _speed = 300; // ???? Warum entsteht hierdurch eine flüssige Bewegung.
 
         // Stores this Sprite's KeyboardInput instance.
-        protected KeyboardInput _keyboardInput;
-        protected GamePadInput _gamePadInput;
+        public KeyboardInput _keyboardInput;
+        public GamePadInput _gamePadInput;
 
         #region BoundingBox
         // Stores this Sprite's BoundingBox for collision detection.
@@ -99,36 +99,36 @@ namespace MonoGame2DBrawler.Sprites
             _boundingBoxTexture = new Texture2D(graphicsDevice, 1, 1, false, SurfaceFormat.Color);
             _boundingBoxTexture.SetData(new[] { Color.White });
 
-            HandleConstructorDefaultValues();
+            // HandleConstructorDefaults();
         }
 
-        /// <summary>
-        /// Assigns Default Values to constructor arguments that have not been passed (null has been passed).
-        /// </summary>
-        private void HandleConstructorDefaultValues()
-        {
-            // Assign Default KeyboardInput if none was passed.
-            if (_keyboardInput == null)
-                _keyboardInput = new KeyboardInput()
-                {
-                    Left = Keys.A,
-                    Up = Keys.W,
-                    Right = Keys.D,
-                    Down = Keys.S,
-                    Attack = Keys.Space
-                };
+        ///// <summary>
+        ///// Assigns Default Values to constructor arguments that have not been passed (null has been passed).
+        ///// </summary>
+        //private void HandleConstructorDefaults()
+        //{
+        //    // Assign Default KeyboardInput if none was passed.
+        //    if (_keyboardInput == null)
+        //        _keyboardInput = new KeyboardInput()
+        //        {
+        //            Left = Keys.A,
+        //            Up = Keys.W,
+        //            Right = Keys.D,
+        //            Down = Keys.S,
+        //            Attack = Keys.Space
+        //        };
 
-            // Assign Default GamePadInput if none was passed.
-            if (_gamePadInput == null)
-                _gamePadInput = new GamePadInput()
-                {
-                    Left = Buttons.LeftThumbstickLeft,
-                    Up = Buttons.LeftThumbstickUp,
-                    Right = Buttons.LeftThumbstickRight,
-                    Down = Buttons.LeftThumbstickDown,
-                    Attack = Buttons.A
-                };
-        }
+        //    // Assign Default GamePadInput if none was passed.
+        //    if (_gamePadInput == null)
+        //        _gamePadInput = new GamePadInput()
+        //        {
+        //            Left = Buttons.LeftThumbstickLeft,
+        //            Up = Buttons.LeftThumbstickUp,
+        //            Right = Buttons.LeftThumbstickRight,
+        //            Down = Buttons.LeftThumbstickDown,
+        //            Attack = Buttons.A
+        //        };
+        //}
 
         #region VirtualMethods
         /// <summary>
@@ -169,10 +169,11 @@ namespace MonoGame2DBrawler.Sprites
 
         #endregion
 
+        #region HandleInput
         /// <summary>
         /// Handles basic KeyboardInput for this Sprite.
         /// </summary>
-        protected virtual void HandleKeyboardInput(KeyboardState keyboardState)
+        public virtual void HandleKeyboardInput(KeyboardState keyboardState)
         {
             // LEFT
             if (keyboardState.IsKeyDown(_keyboardInput.Left))
@@ -191,10 +192,11 @@ namespace MonoGame2DBrawler.Sprites
                 GoDown();
         }
 
+        
         /// <summary>
         /// Handles basic GamePadInput for this Sprite.
         /// </summary>
-        protected virtual void HandleGamePadInput(GamePadState gamePadState)
+        public virtual void HandleGamePadInput(GamePadState gamePadState)
         {
             // LEFT
             if (gamePadState.IsButtonDown(_gamePadInput.Left))
@@ -212,6 +214,7 @@ namespace MonoGame2DBrawler.Sprites
             if (gamePadState.IsButtonDown(_gamePadInput.Down))
                 GoDown();
         }
+        #endregion
 
         /// <summary>
         /// Checks whether or not this Sprite collides with partner.
@@ -290,6 +293,11 @@ namespace MonoGame2DBrawler.Sprites
 
             // Reset Velocity. Prevents Sprite from moving without there being actual input.
             _velocity = Vector2.Zero;
+        }
+
+        public override string ToString()
+        {
+            return _name + "[" + _position.X + "|" + _position.Y + "]";
         }
         #endregion
     }

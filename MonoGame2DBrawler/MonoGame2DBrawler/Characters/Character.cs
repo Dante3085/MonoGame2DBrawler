@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 using MonoGame2DBrawler.Sprites;
 using MonoGame2DBrawler.Characters.Actions;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using MonoGame2DBrawler.Input;
 
 namespace MonoGame2DBrawler.Characters
 {
@@ -21,13 +24,14 @@ namespace MonoGame2DBrawler.Characters
     /// - Use Item
     /// - End Turn
     /// </summary>
-    public class Character : GameObject
+    public class Character : GameObject, IInputable
     {
         #region MemberVariables
         private AnimatedSprite _animatedSprite;
 
         private string _name;
 
+        #region Stats
         private int _currentHp;
         private int _maxHp;
 
@@ -39,11 +43,22 @@ namespace MonoGame2DBrawler.Characters
         private int _wit;
         private int _agility;
         private int _speed;
-        private int _revengeValue = 0;
+        private int _revengeValue;
+        #endregion
 
         private bool _isAlive = true;
 
-        private EAction _currentAction = EAction.None;
+        private bool _isAttacking = false;
+
+        private EAction _currentAction = EAction.Cleave;
+
+        #region Input
+        private KeyboardInput _keyboardInput;
+        private GamePadInput _gamePadInput;
+
+        private KeyboardState _previousKeyboardState = Keyboard.GetState();
+        private GamePadState _previousGamePadState = GamePad.GetState(PlayerIndex.One);
+        #endregion
 
         private Dictionary<EAction, AAction> _actions = new Dictionary<EAction, AAction>();
         #endregion
@@ -67,9 +82,11 @@ namespace MonoGame2DBrawler.Characters
         public int MaxHp { get => _maxHp; set => _maxHp = value; }
         public int CurrentMp { get => _currentMp; set => _currentMp = value; }
         public int MaxMp { get => _maxMp; set => _maxMp = value; }
+        public bool IsAttacking { get => _isAttacking; set => _isAttacking = value; }
         #endregion
 
-        public Character(String name = "NoName", int maxHp = 0, int maxMp = 0, int strength = 0, int defence = 0, int wit = 0, int agility = 0, int speed = 0)
+        public Character(String name = "NoName", int maxHp = 0, int maxMp = 0, int strength = 0, int defence = 0, int wit = 0, 
+            int agility = 0, int speed = 0, KeyboardInput keyboardInput = null, GamePadInput gamePadInput = null, AnimatedSprite animatedSprite = null)
         {
             _name = name;
 
@@ -85,19 +102,154 @@ namespace MonoGame2DBrawler.Characters
             _agility = agility;
             _speed = speed;
 
+            _keyboardInput = keyboardInput;
+            _gamePadInput = gamePadInput;
+
+            _animatedSprite = animatedSprite;
+
+            // This statement has to be after all variable assignments.
+            HandleConstructorDefaults();
+
+            _animatedSprite._keyboardInput = this._keyboardInput;
+            _animatedSprite._gamePadInput = this._gamePadInput;
+
             SetUp_Items();
             SetUp_PhysicalSkills();
             SetUp_RevengeSkills();
             SetUp_Magics();
-
-            _currentAction = EAction.Cleave;
         }
 
-        public void UseCurrentAction(Character target)
+        /// <summary>
+        /// Handles certain Default Parameters of Constructor.
+        /// Example: KeyboardInput and GamePadInput can't be null. For user convenience they are set to default layouts
+        /// when nothing was passed through constructor.
+        /// </summary>
+        private void HandleConstructorDefaults()
+        {
+            // NO KEYBOARDINPUT PASSED
+            if (_keyboardInput == null)
+            {
+                _keyboardInput = new KeyboardInput()
+                {
+                    Left = Keys.A,
+                    Up = Keys.W,
+                    Right = Keys.D,
+                    Down = Keys.S,
+                    Attack = Keys.Space
+                };
+            }
+
+            // NO GAMEPADINPUT PASSED
+            if (_gamePadInput == null)
+            {
+                _gamePadInput = new GamePadInput()
+                {
+                    Left = Buttons.LeftThumbstickLeft,
+                    Up = Buttons.LeftThumbstickUp,
+                    Right = Buttons.LeftThumbstickRight,
+                    Down = Buttons.LeftThumbstickDown,
+                    Attack = Buttons.A
+                };
+            }
+
+            if (_animatedSprite == null)
+            {
+                //_animatedSprite = new AnimatedSprite(this._name, Vector2.Zero, PlayerIndex.One, )
+            }
+        }
+
+        /// <summary>
+        /// Use every tick. Handles necessary updates for a Character.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="characters"></param>
+        public void Update(GameTime gameTime, List<Character> characters)
+        {
+            _animatedSprite.Update(gameTime);
+
+            // TODO: PlayerIndex muss an AnimSprite gegeben werden.
+            GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+            if (gamePadState.IsConnected)
+                HandleGamePadInput(gamePadState);
+            else
+                HandleKeyboardInput(Keyboard.GetState());
+
+            if (characters != null)
+                CheckCollisions(characters);
+
+            CheckCharacterStatus();
+        }
+
+        private void CheckCharacterStatus()
+        {
+            if (!_isAlive)
+                Respawn();
+        }
+
+        private void Respawn()
+        {
+            _animatedSprite._position.X = 0;
+            _animatedSprite._position.Y = 0;
+
+            _currentHp = _maxHp;
+
+            _isAlive = true;
+        }
+
+        /// <summary>
+        /// Checks if this Character collides with any of the characters in the passed list.
+        /// If yes calls HandleCollision().
+        /// </summary>
+        /// <param name="characters"></param>
+        private void CheckCollisions(List<Character> characters)
+        {
+            foreach (Character c in characters)
+                if (this.AnimatedSprite.CollidesWith(c.AnimatedSprite))
+                    HandleCollision(c);
+        }
+
+        /// <summary>
+        /// Handles Collisions, i.e. decides what will happen on collision.
+        /// </summary>
+        /// <param name="target"></param>
+        private void HandleCollision(Character target)
+        {
+            if (_isAttacking)
+            {
+                _isAttacking = false;
+                UseCurrentAction(target);
+            }
+        }
+
+        private void UseCurrentAction(Character target)
         {
             _actions[_currentAction].ExecuteAction(target);
-            Game1.gameConsole.Log(this.Name + " used " + _currentAction + " on " + target.Name);
+
+            Game1.gameConsole.Log(target.ToString());
         }
+
+        public override string ToString()
+        {
+            return _name + "[" + _currentHp + "|" + _maxHp + "]";
+        }
+
+        #region HandleInput
+        public void HandleKeyboardInput(KeyboardState keyboardState)
+        {
+            if (keyboardState.IsKeyDown(_keyboardInput.Attack) && _previousKeyboardState.IsKeyUp(_keyboardInput.Attack))
+                _isAttacking = true;
+
+            _previousKeyboardState = keyboardState;
+        }
+
+        public void HandleGamePadInput(GamePadState gamePadState)
+        {
+            if (gamePadState.IsButtonDown(_gamePadInput.Attack) && _previousGamePadState.IsButtonUp(_gamePadInput.Attack))
+                _isAttacking = true;
+
+            _previousGamePadState = gamePadState;
+        }
+        #endregion
 
         #region SetUpMethods
         private void SetUp_Items()

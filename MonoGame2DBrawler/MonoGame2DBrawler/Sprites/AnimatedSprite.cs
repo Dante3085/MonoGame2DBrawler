@@ -75,7 +75,7 @@ namespace MonoGame2DBrawler.Sprites
 
         }
 
-        public void AddAnimation(int numFrames, int yPos, int xStartFrame, string name, int width, int height, Vector2 offset)
+        private void AddAnimation(int numFrames, int yPos, int xStartFrame, string name, int width, int height, Vector2 offset)
         {
             // Creates an array of rectangles which will be used when playing an animation
             Rectangle[] Rectangles = new Rectangle[numFrames];
@@ -185,7 +185,7 @@ namespace MonoGame2DBrawler.Sprites
 
         #endregion 
 
-        protected override void HandleKeyboardInput(KeyboardState keyboardState)
+        public override void HandleKeyboardInput(KeyboardState keyboardState)
         {
             // Directional Movement or Idle
             if (!_isAttacking)
@@ -218,7 +218,7 @@ namespace MonoGame2DBrawler.Sprites
             _currentDirection = Direction.none;
         }
 
-        protected override void HandleGamePadInput(GamePadState gamePadState)
+        public override void HandleGamePadInput(GamePadState gamePadState)
         {
             // Directional Movement or Idle
             if (!_isAttacking)
@@ -369,7 +369,7 @@ namespace MonoGame2DBrawler.Sprites
         /// Plays the animation specified by it's name.
         /// </summary>
         /// <param name="name">Animation to play</param>
-        public void PlayAnimation(string name)
+        private void PlayAnimation(string name)
         {
             // Makes sure we won't start a new annimation unless it differs from our current animation.
             if (_currentFrame != name && _currentDirection.Equals(Direction.none)) 
@@ -383,7 +383,7 @@ namespace MonoGame2DBrawler.Sprites
         /// Called everytime a frame finishes.
         /// </summary>
         /// <param name="animation"></param>
-        public virtual void AnimationDone(string animation)
+        private void AnimationDone(string animation)
         {
             if (animation.Contains("Attack"))
                 _isAttacking = false;

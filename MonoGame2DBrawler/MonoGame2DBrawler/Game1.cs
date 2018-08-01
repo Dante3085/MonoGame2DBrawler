@@ -7,6 +7,7 @@ using VosSoft.Xna.GameConsole;
 using MonoGame2DBrawler.Sprites;
 using MonoGame2DBrawler.Input;
 using MonoGame2DBrawler.Characters;
+using System;
 
 namespace MonoGame2DBrawler
 {
@@ -28,7 +29,7 @@ namespace MonoGame2DBrawler
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -64,24 +65,21 @@ namespace MonoGame2DBrawler
             animSprites = new List<AnimatedSprite>()
             {
                 new AnimatedSprite("AnimatedSprite 1", new Vector2(100, 100), PlayerIndex.One, GraphicsDevice, playerSheet),
-                new AnimatedSprite("AnimatedSprite 2", new Vector2(200, 100), PlayerIndex.Two, GraphicsDevice, playerSheet, keyboardInput: new KeyboardInput()
-                {
-                    Left = Keys.Left,
-                    Up = Keys.Up,
-                    Right = Keys.Right,
-                    Down = Keys.Down
-                }),
+                new AnimatedSprite("AnimatedSprite 2", new Vector2(200, 100), PlayerIndex.Two, GraphicsDevice, playerSheet, keyboardInput: new KeyboardInput()),
             };
 
             characters = new List<Character>()
             {
-                new Character("Character 1", 1000, 100, 10, 10, 10, 10, 10),
-                new Character("Character 2", 500, 200, 20, 20, 20, 20, 20)
+                new Character("Character 1", 1000, 100, 10, 10, 10, 10, 10, animatedSprite: animSprites[0]),
+                new Character("Character 2", 500, 200, 20, 20, 20, 20, 20, animatedSprite: animSprites[1], keyboardInput: new KeyboardInput()
+                {
+                    Left = Keys.Left,
+                    Up = Keys.Up,
+                    Right = Keys.Right,
+                    Down = Keys.Down,
+                    Attack = Keys.RightShift
+                })
             };
-
-            characters[0].AnimatedSprite = animSprites[0];
-            characters[1].AnimatedSprite = animSprites[1];
-
         }
 
         /// <summary>
@@ -100,6 +98,8 @@ namespace MonoGame2DBrawler
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            // gameConsole.Log(Convert.ToString(1f / gameTime.ElapsedGameTime.TotalSeconds));
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -120,11 +120,7 @@ namespace MonoGame2DBrawler
             // TODO: Add your update logic here
 
             foreach (Character c in characters)
-                c.AnimatedSprite.Update(gameTime);
-
-            if (characters[0].AnimatedSprite.CollidesWith(characters[1].AnimatedSprite))
-                characters[0].UseCurrentAction(characters[1]);
-
+                c.Update(gameTime, characters);
 
             base.Update(gameTime);
         }

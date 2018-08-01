@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/2_IT_Informatik/2_Programmierung/1_MSVS2017Entwicklung/1_Projekte/MonoGame2DBrawler/MonoGame2DBrawler/MonoGame2DBrawler/Content/ConsoleFont.spritefont</SourceFile>
-  <SourceTime>2018-07-22T23:49:26.3753372+02:00</SourceTime>
+  <SourceTime>2018-07-31T16:14:53.9488247+02:00</SourceTime>
   <DestFile>C:/2_IT_Informatik/2_Programmierung/1_MSVS2017Entwicklung/1_Projekte/MonoGame2DBrawler/MonoGame2DBrawler/MonoGame2DBrawler/Content/bin/Windows/ConsoleFont.xnb</DestFile>
-  <DestTime>2018-07-26T08:51:17.3863404+02:00</DestTime>
+  <DestTime>2018-07-31T16:14:59.2453229+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2018-06-18T05:50:32+02:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

@@ -23,7 +23,9 @@ namespace MonoGame2DBrawler.Characters.Actions
         private string _description;
         private EActionMethod[] _registeredActionMethods;
 
-        public AAction(int hpModifier = 0, int mpModifier = 0, int revengeModifier = 0, string description = "DefaultDescription", EActionMethod[] registeredActionMethods = null)
+        public static AAction DoubleHealthPotion = new AAction(registeredActionMethods: new EActionMethod[] { EActionMethod.DoubleHealth });
+
+        private AAction(int hpModifier = 0, int mpModifier = 0, int revengeModifier = 0, string description = "DefaultDescription", EActionMethod[] registeredActionMethods = null)
         {
             _hpModifier = hpModifier;
             _mpModifier = mpModifier;
@@ -33,7 +35,7 @@ namespace MonoGame2DBrawler.Characters.Actions
 
             // TODO: Methoden, die für jede Instanz dieser Klasse gleich sind werden mit jeder
             // neuen Instanz in immer wieder das gleiche Dictionary gepackt.
-            SetUpActions();
+            SetUpActionMethods();
         }
 
         public void ExecuteAction(Character target)
@@ -76,7 +78,7 @@ namespace MonoGame2DBrawler.Characters.Actions
         #region PredefinedPhysicalSkills
         public static AAction Cleave()
         {
-            return new AAction(hpModifier: 100, revengeModifier: 10, description: "PhysicallSkill: Cleave", registeredActionMethods: new EActionMethod[] { EActionMethod.DealDamage });
+            return new AAction(hpModifier: 200, revengeModifier: 10, description: "PhysicallSkill: Cleave", registeredActionMethods: new EActionMethod[] { EActionMethod.DealDamage });
         }
         #endregion
 
@@ -92,8 +94,8 @@ namespace MonoGame2DBrawler.Characters.Actions
         }
         #endregion
 
-        #region Actions
-        private void SetUpActions()
+        #region ActionMethods
+        private void SetUpActionMethods()
         {
             _actionMethods[EActionMethod.HalfHealth] = HalfHealth;
             _actionMethods[EActionMethod.DoubleHealth] = DoubleHealth;
@@ -103,18 +105,26 @@ namespace MonoGame2DBrawler.Characters.Actions
             _actionMethods[EActionMethod.RefillMana] = RefillMana;
         }
 
+        /// <summary>
+        /// Reduces the target's maxHp to half of it's current maxHp.
+        /// </summary>
+        /// <param name="target"></param>
         private void HalfHealth(Character target)
         {
             target.MaxHp = (int)(target.MaxHp * 0.5);
         }
 
+        /// <summary>
+        /// Increases the target's maxHp to double of it's current maxHp.
+        /// </summary>
+        /// <param name="target"></param>
         private void DoubleHealth(Character target)
         {
             target.MaxHp = target.MaxHp * 2;
         }
 
         /// <summary>
-        /// Kills a Character by putting his current hp to int.MinValue.
+        /// Kills the target by setting it's currentHp to int.MinValue.
         /// </summary>
         /// <param name="target"></param>
         private void Death(Character target)
