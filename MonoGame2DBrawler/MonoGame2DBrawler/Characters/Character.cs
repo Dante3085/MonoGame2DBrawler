@@ -177,6 +177,12 @@ namespace MonoGame2DBrawler.Characters
             if (characters != null)
                 CheckCollisions(characters);
 
+            // TODO: Verkapseln. Sorgt dafür, dass _isAttacking auf false gesetzt wird, wenn die Angriffsanimation vorbei ist.
+            if (!_animatedSprite.PlayingAnimation)
+                _isAttacking = false;
+
+            Game1.gameConsole.Log(ToString() + " isAttacking: " + _isAttacking);
+
             CheckCharacterStatus();
         }
 
@@ -188,8 +194,8 @@ namespace MonoGame2DBrawler.Characters
 
         private void Respawn()
         {
-            _animatedSprite._position.X = 0;
-            _animatedSprite._position.Y = 0;
+            _animatedSprite._position.X = 500;
+            _animatedSprite._position.Y = 300;
 
             _currentHp = _maxHp;
 

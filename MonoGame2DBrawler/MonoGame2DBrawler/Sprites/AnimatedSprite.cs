@@ -32,6 +32,8 @@ namespace MonoGame2DBrawler.Sprites
         private Direction _currentDirection = Direction.none;
 
         private bool _isAttacking = false;
+
+        private bool _playingAnimation = false;
         #endregion
 
         #region Properties
@@ -39,6 +41,8 @@ namespace MonoGame2DBrawler.Sprites
         {
             set { _timeToUpdate = 1f / value; }
         }
+
+        public bool PlayingAnimation { get => _playingAnimation; set => _playingAnimation = value; }
         #endregion
 
         public AnimatedSprite(string name, Vector2 position, PlayerIndex playerIndex, GraphicsDevice graphicsDevice, Texture2D texture = null, KeyboardInput keyboardInput = null, GamePadInput gamePadInput = null) : base(name, position, playerIndex, graphicsDevice, texture, keyboardInput, gamePadInput)
@@ -374,6 +378,8 @@ namespace MonoGame2DBrawler.Sprites
             // Makes sure we won't start a new annimation unless it differs from our current animation.
             if (_currentFrame != name && _currentDirection.Equals(Direction.none)) 
             {
+                _playingAnimation = true;
+
                 _currentFrame = name;
                 _frameIndex = 0;
             }
@@ -387,6 +393,8 @@ namespace MonoGame2DBrawler.Sprites
         {
             if (animation.Contains("Attack"))
                 _isAttacking = false;
+
+            _playingAnimation = false;
         }
     }
 }

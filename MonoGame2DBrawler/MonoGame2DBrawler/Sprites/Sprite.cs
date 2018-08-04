@@ -58,7 +58,6 @@ namespace MonoGame2DBrawler.Sprites
         /// Variable to remember if collision happened with this Sprite.
         /// </summary>
         protected bool _collisionDetected = false;
-
         #endregion
 
         #region Properties

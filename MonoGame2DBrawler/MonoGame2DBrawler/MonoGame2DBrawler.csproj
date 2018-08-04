@@ -45,6 +45,7 @@
     <Compile Include="Characters\Actions\EAction.cs" />
     <Compile Include="Characters\Actions\EActionMethod.cs" />
     <Compile Include="Characters\Character.cs" />
+    <Compile Include="Characters\DynamicHealthBar.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameConsole\Command.cs" />
     <Compile Include="GameConsole\CommandEventArgs.cs" />

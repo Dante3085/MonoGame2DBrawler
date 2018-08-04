@@ -18,6 +18,7 @@ namespace MonoGame2DBrawler
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteFont spriteFont;
 
         public static GameConsole gameConsole;
 
@@ -29,7 +30,7 @@ namespace MonoGame2DBrawler
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -58,6 +59,8 @@ namespace MonoGame2DBrawler
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            spriteFont = Content.Load<SpriteFont>("SpriteFont1");
 
             // TODO: use this.Content to load your game content here
             Texture2D playerSheet = Content.Load<Texture2D>("playerSheet");
@@ -117,6 +120,11 @@ namespace MonoGame2DBrawler
                     c.AnimatedSprite.PDrawBoundingBox = false;
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.F3))
+                graphics.IsFullScreen = true;
+            else if (Keyboard.GetState().IsKeyDown(Keys.F4))
+                graphics.IsFullScreen = false;
+
             // TODO: Add your update logic here
 
             foreach (Character c in characters)
@@ -136,8 +144,14 @@ namespace MonoGame2DBrawler
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
+            string stats = "";
             foreach (Character c in characters)
+            {
                 c.AnimatedSprite.Draw(spriteBatch, animSprites);
+                stats += c.ToString() + "\n";
+            }
+
+            spriteBatch.DrawString(spriteFont, stats, new Vector2(0, 0), Color.Black);
 
             spriteBatch.End();
 
